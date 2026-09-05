@@ -61,29 +61,16 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85
 .recordRight{display:flex;align-items:center;gap:10px}.money{text-align:right;font-weight:900}.money small{display:block;color:#7186a0;font-weight:500;font-size:10px;margin-top:2px}
 .delete{width:37px;height:37px;border-radius:12px;border:1px solid #542330;background:#21131a;color:#ff6177;font-size:20px}
 .empty{text-align:center;color:#7288a3;padding:26px 10px}.emptyIcon{font-size:29px;margin-bottom:7px}
-.footer{text-align:center;color:#536983;font-size:12px;margin-top:24px}
+.holidayCard{background:linear-gradient(110deg,#0d1b2b,#17152a);border-color:#29456a}.holidayRow{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:9px}.holidayName{font-size:23px;font-weight:950}.holidayDate{color:#8398b2;font-size:13px;margin-top:5px}.holidayDays{text-align:right;min-width:100px}.holidayDays b{font-size:34px;font-weight:950;display:block;line-height:1}.holidayDays span{font-size:11px;color:#8297b0}.settingsCard{border-color:#334568}.salaryBox{background:#08111e;border:1px solid #294263;border-radius:18px;padding:13px 15px}.salaryBox label{display:block;font-size:11px;color:#7891ad;font-weight:900;letter-spacing:1px;margin-bottom:8px}.salaryInput{display:flex;align-items:center;gap:8px}.salaryInput>span{font-size:18px;color:#8da3bd;font-weight:900}.salaryInput input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;font-size:20px;font-weight:900}.salaryInput button{border:0;border-radius:12px;padding:10px 12px;background:#18b8ff;color:#07111f;font-size:11px;font-weight:950}.salaryHint{font-size:11px;color:#7187a1;margin-top:7px}
 @media(max-width:600px){main{padding:20px 15px 38px}.header{align-items:flex-start}.period{min-width:142px}.period b{font-size:12px}.tag{font-size:12px}.logo{width:49px;height:49px}h1{font-size:31px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.remaining{font-size:53px}}
 </style>
 </head>
 <body>
 <main>
-
-<section class="card hero">
- <div class="heroGlow"></div>
- <div class="label">Kalan mesai</div>
- <div class="remaining" id="remaining">60 sa</div>
- <div class="heroSub" id="heroSub">60 saatlik limit</div>
- <div class="progress"><div id="progressBar"></div></div>
-</section>
-
-<section class="card totalHero">
- <div>
-  <div class="label">TOPLAM ALACAĞIN</div>
-  <div class="totalHeroAmount" id="totalHero">₺34.721,00</div>
-  <div class="totalHeroSub">34.721 TL maaş + biriken mesai</div>
- </div>
- <div class="totalHeroIcon">₺</div>
-</section>
+<header class="header">
+ <div class="brand"><div class="logo">◷</div><div><h1>MESAI</h1><div class="tag">Çalışmanın karşılığı her zaman değerli.</div></div></div>
+ <div class="period"><span>Çalışma dönemi</span><b id="periodPill">21 Ağu – 20 Eyl</b></div>
+</header>
 
 <section class="card">
  <div class="sectionHead"><div class="title">＋ MESAI EKLE</div><div class="hint">Günü seç, süreyi belirle.</div></div>
@@ -94,7 +81,21 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85
  </div>
  <button class="save" onclick="saveSelected()">✓ &nbsp; KAYDET</button>
 </section>
-
+<section class="card hero">
+ <div class="heroGlow"></div>
+ <div class="label">Kalan mesai</div>
+ <div class="remaining" id="remaining">60 sa</div>
+ <div class="heroSub" id="heroSub">60 saatlik limit</div>
+ <div class="progress"><div id="progressBar"></div></div>
+</section>
+<section class="card totalHero">
+ <div>
+  <div class="label">TOPLAM ALACAĞIN</div>
+  <div class="totalHeroAmount" id="totalHero">₺34.721,00</div>
+  <div class="totalHeroSub">34.721 TL maaş + biriken mesai</div>
+ </div>
+ <div class="totalHeroIcon">₺</div>
+</section>
 <section class="card">
  <div class="sectionHead"><div class="title">▥ BU DÖNEM</div><div class="hint" id="periodText"></div></div>
  <div class="stats">
@@ -104,16 +105,25 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85
  </div>
  <div class="total"><div><small>Toplam (Maaş + Mesai)</small><b id="totalPay">₺34.721,00</b></div><div class="arrow">›</div></div>
 </section>
-
+<section class="card settingsCard">
+ <div class="sectionHead"><div class="title">⚙️ AYARLAR</div><div class="hint">Maaşını buradan güncelle.</div></div>
+ <div class="salaryBox"><label>GÜNCEL NET MAAŞ</label><div class="salaryInput"><span>₺</span><input id="salaryInput" type="number" inputmode="decimal" min="0" step="0.01"><button type="button" onclick="saveSalary()">KAYDET</button></div><div class="salaryHint" id="salaryHint"></div></div>
+</section>
+<section class="card holidayCard">
+ <div class="label">EN YAKIN RESMİ BAYRAM</div>
+ <div class="holidayRow"><div><div class="holidayName" id="holidayName">—</div><div class="holidayDate" id="holidayDate">—</div></div><div class="holidayDays"><b id="holidayDays">—</b><span>gün kaldı</span></div></div>
+</section>
 <section class="card">
- <div class="recordHead"><div><div class="title">☷ MESAİ KAYITLARI</div><div class="hint">Bu dönemde eklediğin mesailer</div></div><button class="clear" onclick="clearAll()">▢ Tümünü Sil</button></div>
+ <div class="recordHead"><div><div class="title">☷ MESAİ KAYITLARI</div><div class="hint">Bu dönemde eklediğin mesailer</div></div><button class="clear" onclick="clearAll()">🗑️ Tümünü Temizle</button></div>
  <div id="history"></div>
 </section>
+
 <div class="footer">Disiplin, özgürlüğün başlangıcıdır.</div>
 </main>
 
 <script>
-const salary=34721, divisor=150, rate=salary/divisor, limit=60;
+const divisor=150, limit=60;
+let salary=Number(localStorage.getItem("mesai_salary")||34721);
 const $=id=>document.getElementById(id);let selectedHours=null;
 function localISO(d){let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
 function fmtHours(h){return Number.isInteger(h)?h.toFixed(0):h.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})}
@@ -136,14 +146,34 @@ function saveSelected(){
 }
 function del(date){localStorage.setItem('mesai',JSON.stringify(records().filter(x=>x.date!==date)));render()}
 function clearAll(){if(confirm('Bu dönemdeki tüm mesai kayıtları silinsin mi?')){let p=periodFor($('date').value);localStorage.setItem('mesai',JSON.stringify(records().filter(x=>periodFor(x.date).key!==p.key)));render()}}
+const holidays=[
+ {date:"2026-10-29",name:"29 Ekim Cumhuriyet Bayramı"},
+ {date:"2027-01-01",name:"1 Ocak Yılbaşı"},
+ {date:"2027-03-09",name:"Ramazan Bayramı Arifesi"},
+ {date:"2027-03-10",name:"Ramazan Bayramı 1. Gün"},
+ {date:"2027-03-11",name:"Ramazan Bayramı 2. Gün"},
+ {date:"2027-03-12",name:"Ramazan Bayramı 3. Gün"},
+ {date:"2027-04-23",name:"23 Nisan Ulusal Egemenlik ve Çocuk Bayramı"},
+ {date:"2027-05-01",name:"1 Mayıs Emek ve Dayanışma Günü"},
+ {date:"2027-05-15",name:"Kurban Bayramı Arifesi"},
+ {date:"2027-05-16",name:"Kurban Bayramı 1. Gün"},
+ {date:"2027-05-17",name:"Kurban Bayramı 2. Gün"},
+ {date:"2027-05-18",name:"Kurban Bayramı 3. Gün"},
+ {date:"2027-05-19",name:"Kurban Bayramı 4. Gün"},
+ {date:"2027-07-15",name:"15 Temmuz Demokrasi ve Millî Birlik Günü"},
+ {date:"2027-08-30",name:"30 Ağustos Zafer Bayramı"},
+ {date:"2027-10-29",name:"29 Ekim Cumhuriyet Bayramı"}
+];
+function nextHoliday(){const today=new Date();today.setHours(0,0,0,0);let h=holidays.find(x=>new Date(x.date+"T00:00:00")>=today);if(!h)return;let d=new Date(h.date+"T00:00:00");let days=Math.ceil((d-today)/86400000);$('holidayName').textContent=h.name;$('holidayDate').textContent=d.toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'});$('holidayDays').textContent=days;}
+function saveSalary(){let v=Number($('salaryInput').value);if(!Number.isFinite(v)||v<0)return alert('Geçerli bir maaş gir.');salary=v;localStorage.setItem('mesai_salary',String(salary));render();alert('Maaş güncellendi.');}
 function render(){
- let p=periodFor($('date').value),arr=records().filter(x=>periodFor(x.date).key===p.key),used=arr.reduce((s,x)=>s+Number(x.hours),0),remain=Math.max(0,limit-used),pay=used*rate;
- $('periodPill').textContent=p.text;$('periodText').textContent=p.text;$('remaining').textContent=fmtHours(remain)+' sa';$('heroSub').textContent=fmtHours(used)+' saat kullanıldı · 60 saatlik limit';$('progressBar').style.width=Math.min(100,used/limit*100)+'%';
+ let rate=salary/divisor; let p=periodFor($('date').value),arr=records().filter(x=>periodFor(x.date).key===p.key),used=arr.reduce((s,x)=>s+Number(x.hours),0),remain=Math.max(0,limit-used),pay=used*rate;
+ $('periodPill').textContent=p.text;$('salaryInput').value=salary;$('salaryHint').textContent='Saatlik mesai ücreti: '+money(rate)+' (maaş ÷ 150)';$('periodText').textContent=p.text;$('remaining').textContent=fmtHours(remain)+' sa';$('heroSub').textContent=fmtHours(used)+' saat kullanıldı · 60 saatlik limit';$('progressBar').style.width=Math.min(100,used/limit*100)+'%';
  $('used').textContent=fmtHours(used)+' sa';$('remain2').textContent=fmtHours(remain)+' sa';$('overtimePay').textContent=money(pay);$('totalPay').textContent=money(salary+pay); $('totalHero').textContent=money(salary+pay);
  arr.sort((a,b)=>b.date.localeCompare(a.date));
  $('history').innerHTML=arr.length?arr.map(x=>`<div class="record"><div><div class="dateText">${new Date(x.date+"T12:00:00").toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'})}</div><div class="meta">${fmtHours(x.hours)} saat mesai</div></div><div class="recordRight"><div class="money">${money(x.hours*rate)}<small>mesai tutarı</small></div><button class="delete" onclick="del('${x.date}')">×</button></div></div>`).join(''):'<div class="empty"><div class="emptyIcon">▤</div>Henüz mesai kaydı yok.<br><span class="hint">Yukarıdan tarih ve mesai süresi seçebilirsin.</span></div>'
 }
-$('date').value=localISO(new Date());$('date').addEventListener('change',()=>{let r=records().find(x=>x.date===$('date').value);selectHours(r?Number(r.hours):null);render()});render();
+$('date').value=localISO(new Date());nextHoliday();setInterval(nextHoliday,60000);$('date').addEventListener('change',()=>{let r=records().find(x=>x.date===$('date').value);selectHours(r?Number(r.hours):null);render()});render();
 </script>
 </body>
 </html>
