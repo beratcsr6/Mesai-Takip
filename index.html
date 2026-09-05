@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<title>MESAI</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#050b14;--card:#0c1728;--card2:#101d31;--line:#203454;--text:#f7faff;--muted:#91a5c1;--blue:#18b8ff;--purple:#8c42ff;--green:#18d99d;--orange:#ff9d2e}
+body{margin:0;min-height:100vh;background:
+radial-gradient(700px 420px at 95% -5%,#17325d55,transparent 60%),
+radial-gradient(600px 400px at -10% 30%,#06384c55,transparent 60%),var(--bg);
+color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+main{width:min(900px,100%);margin:auto;padding:25px 18px 45px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:31px;
+background:linear-gradient(145deg,#18bfff,#7545ff);box-shadow:0 10px 35px #187cff35}
+h1{font-size:35px;letter-spacing:-1.8px;line-height:1;margin:0;font-weight:950}
+.tag{font-size:13px;color:#9cb0ca;margin-top:7px}
+.period{min-width:175px;padding:12px 15px;border:1px solid #263b60;border-radius:19px;background:#0c192c;text-align:left}
+.period span{font-size:11px;color:#7890ae;text-transform:uppercase;letter-spacing:1px;font-weight:850}
+.period b{display:block;font-size:14px;margin-top:4px}
+.card{background:linear-gradient(145deg,#0e1a2c,#091321);border:1px solid var(--line);border-radius:28px;padding:20px;margin:14px 0;box-shadow:0 16px 50px #00000030}
+.totalHero{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(110deg,#10243a,#21143b);border-color:#37527b}
+.totalHeroAmount{font-size:35px;font-weight:950;letter-spacing:-1.5px;margin-top:7px;background:linear-gradient(90deg,#fff,#70d8ff,#b76cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.totalHeroSub{font-size:12px;color:#8fa4be;margin-top:5px}
+.totalHeroIcon{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;font-size:24px;font-weight:950;background:linear-gradient(145deg,#18b8ff,#8c42ff);box-shadow:0 8px 25px #4d55ff30}
+.hero{position:relative;overflow:hidden;padding:22px}
+.heroGlow{position:absolute;right:-70px;top:-85px;width:220px;height:220px;border-radius:50%;background:#167dff16}
+.label{font-size:13px;color:#9aacc4;text-transform:uppercase;letter-spacing:1.4px;font-weight:900}
+.remaining{font-size:58px;line-height:1;letter-spacing:-3px;font-weight:950;margin:9px 0 7px}
+.heroSub{color:#91a6c0;font-size:14px}
+.progress{height:10px;border-radius:99px;background:#17263c;margin-top:19px;overflow:hidden}
+.progress div{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#18c0ff,#7747ff,#a13cff);transition:.25s}
+.sectionHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.title{font-size:19px;font-weight:950;letter-spacing:-.3px}
+.hint{font-size:12px;color:#7f94ae}
+.dateBox{background:#08111e;border:1px solid #294263;border-radius:18px;padding:12px 15px}
+.dateBox label{display:block;font-size:11px;color:#7891ad;font-weight:900;letter-spacing:1px;margin-bottom:6px}
+input[type=date]{width:100%;border:0;outline:0;background:transparent;color:white;font-size:17px;font-weight:800}
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:13px}
+.option{min-height:112px;border-radius:21px;padding:16px;border:1px solid #2a3c59;background:#101c2e;color:#fff;text-align:left;position:relative;transition:.15s}
+.option .icon{font-size:25px;margin-bottom:8px}.option strong{font-size:20px;display:block}.option small{color:#8196b0;display:block;margin-top:4px;font-size:12px}
+.option.selected.short{border:2px solid var(--blue);background:linear-gradient(145deg,#062b42,#11213a);box-shadow:0 0 0 2px #18b8ff20,0 10px 28px #18b8ff17}
+.option.selected.full{border:2px solid var(--orange);background:linear-gradient(145deg,#38250f,#1a2030);box-shadow:0 0 0 2px #ff9d2e20,0 10px 28px #ff9d2e15}
+.option.selected:after{content:"✓";position:absolute;right:12px;top:11px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#07111f;font-weight:950}
+.option.selected.short strong{color:#42c8ff}.option.selected.full strong{color:#ffb03f}
+.save{width:100%;border:0;border-radius:20px;padding:18px;margin-top:13px;background:linear-gradient(100deg,#12baff,#555cff 55%,#a43bff);color:white;font-size:17px;font-weight:950;box-shadow:0 11px 30px #4a58ff30}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{min-height:105px;border-radius:19px;padding:14px;background:#091421;border:1px solid #1d304a}
+.stat.green{border-color:#11896666}.stat.blue{border-color:#1973bd66}.stat.purple{border-color:#7a40c966}
+.stat .icon{font-size:21px;margin-bottom:7px}.stat span{display:block;font-size:12px;color:#8298b3}.stat b{font-size:20px;display:block;margin-top:4px}
+.total{margin-top:10px;border-radius:19px;padding:16px 17px;background:linear-gradient(110deg,#24190b,#161725);border:1px solid #9a5b1466;display:flex;align-items:center;justify-content:space-between}
+.total small{display:block;color:#9d9b99;font-size:12px}.total b{font-size:23px;display:block;margin-top:4px}.arrow{font-size:28px;color:#ffad3b}
+.recordHead{display:flex;justify-content:space-between;align-items:center}.clear{border:0;background:none;color:#ff5b70;font-weight:900}
+.record{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-top:1px solid #1c2c41}
+.record:first-child{margin-top:6px}.dateText{font-weight:900}.meta{font-size:12px;color:#8095af;margin-top:4px}
+.recordRight{display:flex;align-items:center;gap:10px}.money{text-align:right;font-weight:900}.money small{display:block;color:#7186a0;font-weight:500;font-size:10px;margin-top:2px}
+.delete{width:37px;height:37px;border-radius:12px;border:1px solid #542330;background:#21131a;color:#ff6177;font-size:20px}
+.empty{text-align:center;color:#7288a3;padding:26px 10px}.emptyIcon{font-size:29px;margin-bottom:7px}
+.footer{text-align:center;color:#536983;font-size:12px;margin-top:24px}
+@media(max-width:600px){main{padding:20px 15px 38px}.header{align-items:flex-start}.period{min-width:142px}.period b{font-size:12px}.tag{font-size:12px}.logo{width:49px;height:49px}h1{font-size:31px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.remaining{font-size:53px}}
+</style>
+</head>
+<body>
+<main>
+<header class="header">
+ <div class="brand"><div class="logo">◷</div><div><h1>MESAI</h1><div class="tag">Çalışmanın karşılığı her zaman değerli.</div></div></div>
+ <div class="period"><span>Çalışma dönemi</span><b id="periodPill">21 Ağu – 20 Eyl</b></div>
+</header>
+
+<section class="card hero">
+ <div class="heroGlow"></div>
+ <div class="label">Kalan mesai</div>
+ <div class="remaining" id="remaining">60 sa</div>
+ <div class="heroSub" id="heroSub">60 saatlik limit</div>
+ <div class="progress"><div id="progressBar"></div></div>
+</section>
+
+<section class="card totalHero">
+ <div>
+  <div class="label">TOPLAM ALACAĞIN</div>
+  <div class="totalHeroAmount" id="totalHero">₺34.721,00</div>
+  <div class="totalHeroSub">34.721 TL maaş + biriken mesai</div>
+ </div>
+ <div class="totalHeroIcon">₺</div>
+</section>
+
+<section class="card">
+ <div class="sectionHead"><div class="title">＋ MESAI EKLE</div><div class="hint">Günü seç, süreyi belirle.</div></div>
+ <div class="dateBox"><label>TARİH SEÇ</label><input id="date" type="date"></div>
+ <div class="options">
+  <button id="opt35" class="option short" onclick="selectHours(3.5)"><div class="icon">◷</div><strong>3,5 SAAT</strong><small>Kısa mesai</small></button>
+  <button id="opt8" class="option full" onclick="selectHours(8)"><div class="icon">◷</div><strong>8 SAAT</strong><small>Tam mesai</small></button>
+ </div>
+ <button class="save" onclick="saveSelected()">✓ &nbsp; KAYDET</button>
+</section>
+
+<section class="card">
+ <div class="sectionHead"><div class="title">▥ BU DÖNEM</div><div class="hint" id="periodText"></div></div>
+ <div class="stats">
+  <div class="stat green"><div class="icon">◷</div><span>Kullanılan</span><b id="used">0 sa</b></div>
+  <div class="stat blue"><div class="icon">⌛</div><span>Kalan</span><b id="remain2">60 sa</b></div>
+  <div class="stat purple"><div class="icon">▣</div><span>Mesai Tutarı</span><b id="overtimePay">₺0,00</b></div>
+ </div>
+ <div class="total"><div><small>Toplam (Maaş + Mesai)</small><b id="totalPay">₺34.721,00</b></div><div class="arrow">›</div></div>
+</section>
+
+<section class="card">
+ <div class="recordHead"><div><div class="title">☷ MESAİ KAYITLARI</div><div class="hint">Bu dönemde eklediğin mesailer</div></div><button class="clear" onclick="clearAll()">▢ Tümünü Sil</button></div>
+ <div id="history"></div>
+</section>
+<div class="footer">Disiplin, özgürlüğün başlangıcıdır.</div>
+</main>
+
+<script>
+const salary=34721, divisor=150, rate=salary/divisor, limit=60;
+const $=id=>document.getElementById(id);let selectedHours=null;
+function localISO(d){let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
+function fmtHours(h){return Number.isInteger(h)?h.toFixed(0):h.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})}
+function money(n){return '₺'+n.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function periodFor(ds){
+ let d=new Date(ds+"T12:00:00"),y=d.getFullYear(),m=d.getMonth(),day=d.getDate(),sy,sm,ey,em;
+ if(day>=21){sy=y;sm=m;ey=m===11?y+1:y;em=(m+1)%12}else{sy=m===0?y-1:y;sm=m===0?11:m-1;ey=y;em=m}
+ const f=(yy,mm,dd)=>new Date(yy,mm,dd).toLocaleDateString('tr-TR',{day:'numeric',month:'short'});
+ return {key:`${sy}-${sm}-${ey}-${em}`,text:`${f(sy,sm,21)} – ${f(ey,em,20)}`}
+}
+function records(){return JSON.parse(localStorage.getItem('mesai')||'[]')}
+function selectHours(h){selectedHours=h;$('opt35').classList.toggle('selected',h===3.5);$('opt8').classList.toggle('selected',h===8)}
+function saveSelected(){
+ let date=$('date').value;if(!date)return alert('Önce bir gün seç.');if(selectedHours===null)return alert('Önce 3,5 veya 8 saat seç.');
+ let arr=records(),p=periodFor(date),idx=arr.findIndex(x=>x.date===date),old=idx>=0?Number(arr[idx].hours):0;
+ let used=arr.filter(x=>periodFor(x.date).key===p.key).reduce((s,x)=>s+Number(x.hours),0);
+ if(used-old+selectedHours>limit)return alert('60 saatlik mesai sınırını aşamazsın.');
+ if(idx>=0)arr[idx].hours=selectedHours;else arr.push({date,hours:selectedHours});
+ localStorage.setItem('mesai',JSON.stringify(arr));selectedHours=null;selectHours(null);render()
+}
+function del(date){localStorage.setItem('mesai',JSON.stringify(records().filter(x=>x.date!==date)));render()}
+function clearAll(){if(confirm('Bu dönemdeki tüm mesai kayıtları silinsin mi?')){let p=periodFor($('date').value);localStorage.setItem('mesai',JSON.stringify(records().filter(x=>periodFor(x.date).key!==p.key)));render()}}
+function render(){
+ let p=periodFor($('date').value),arr=records().filter(x=>periodFor(x.date).key===p.key),used=arr.reduce((s,x)=>s+Number(x.hours),0),remain=Math.max(0,limit-used),pay=used*rate;
+ $('periodPill').textContent=p.text;$('periodText').textContent=p.text;$('remaining').textContent=fmtHours(remain)+' sa';$('heroSub').textContent=fmtHours(used)+' saat kullanıldı · 60 saatlik limit';$('progressBar').style.width=Math.min(100,used/limit*100)+'%';
+ $('used').textContent=fmtHours(used)+' sa';$('remain2').textContent=fmtHours(remain)+' sa';$('overtimePay').textContent=money(pay);$('totalPay').textContent=money(salary+pay); $('totalHero').textContent=money(salary+pay);
+ arr.sort((a,b)=>b.date.localeCompare(a.date));
+ $('history').innerHTML=arr.length?arr.map(x=>`<div class="record"><div><div class="dateText">${new Date(x.date+"T12:00:00").toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'})}</div><div class="meta">${fmtHours(x.hours)} saat mesai</div></div><div class="recordRight"><div class="money">${money(x.hours*rate)}<small>mesai tutarı</small></div><button class="delete" onclick="del('${x.date}')">×</button></div></div>`).join(''):'<div class="empty"><div class="emptyIcon">▤</div>Henüz mesai kaydı yok.<br><span class="hint">Yukarıdan tarih ve mesai süresi seçebilirsin.</span></div>'
+}
+$('date').value=localISO(new Date());$('date').addEventListener('change',()=>{let r=records().find(x=>x.date===$('date').value);selectHours(r?Number(r.hours):null);render()});render();
+</script>
+</body>
+</html>
