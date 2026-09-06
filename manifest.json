@@ -1,1 +1,9 @@
-{"name":"MESAI","short_name":"MESAI","start_url":"./","display":"standalone","background_color":"#050b14","theme_color":"#07111f"}
+{
+  "name": "Mesai Takip",
+  "short_name": "Mesai",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#080d19",
+  "theme_color": "#080d19",
+  "icons": []
+}
