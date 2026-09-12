@@ -1,0 +1,12 @@
+{
+  "name": "Mesai Takip",
+  "short_name": "Mesai Takip",
+  "description": "20 → 20 mesai ve maaş takip uygulaması",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#111827",
+  "lang": "tr",
+  "dir": "ltr"
+}
